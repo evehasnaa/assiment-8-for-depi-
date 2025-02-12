@@ -1,0 +1,13 @@
+def filter_high_salary(row, mean_salary):
+    return row['Salary'] > mean_salary
+
+# Calculate mean salary
+mean_salary = df['Salary'].mean()
+
+# Apply filter
+filtered_df = df[df.apply(lambda row: filter_high_salary(row, mean_salary), axis=1)]
+print(filtered_df)
+
+
+
+
