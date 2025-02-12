@@ -1,0 +1,88 @@
+create table employees (
+employeesID int primary key,
+name varchar(50),
+departmentID int,
+salary decimal(10,2)
+);
+INSERT INTO employees (EmployeeID, Name, DepartmentID, Salary)
+VALUES
+(1, 'John Doe', 101, 50000),
+(2, 'Jane Smith', 102, 60000),
+(3, 'Alice Brown', 101, 70000),
+(4, 'Bob Johnson', 103, 55000),
+(5, 'Charlie Lee', 102, 65000);
+
+CREATE TABLE departments (
+    DepartmentID INT PRIMARY KEY,
+    DepartmentName VARCHAR(50),
+    Location VARCHAR(50)
+);
+
+INSERT INTO departments (DepartmentID, DepartmentName, Location)
+VALUES
+(101, 'Sales', 'New York'),
+(102, 'Marketing', 'Chicago'),
+(103, 'HR', 'Los Angeles'),
+(104, 'IT', 'San Francisco');
+
+Select d.departmentname, e.name
+from departments d
+left join employees e on d.departmentID = e.departmentID;
+
+
+Alter table employees  Add supervisorID int;
+
+set sql_safe_updates=0;
+update employees set supervisorID =3 where employeeID =1;
+update employees set supervisorID =3 where employeeID =4;
+
+
+
+select d.departmentname from departments d 
+where d.departmentID = ( select departmentID from employees  order by salary Desc 
+limit 1);
+
+
+select d.departmentname,  count(e.employeeID) as count_of_employees, avg(e.salary) as avgsalary
+from departments d
+left join employees e on d.departmentID = e.departmentID
+group by d. departmentname;
+
+
+select d.departmentname , sum(e.salary) as total_salary
+from departments d
+left join employees e on d.departmentid  = e.departmentid
+where d.departmentid in ( select departmentid from employees 
+group by departmentid having count(employeeid) >1 )
+group by d.departmentname;
+
+
+
+
+#Union
+
+select name, 'Sales' as department from employees where departmentid=101
+union
+select name, 'marketing' as department from employees where departmentid=102;
+
+
+
+# case 
+
+select name, departmentid, salary,
+case 
+   when salary >60000 then 'high'
+   when salary between 55000 and 60000 then 'Mid'
+   else 'low'
+   end as salarycategory
+   from employees  where departmentid=101
+union
+   select name, departmentid, salary,
+case 
+   when salary >60000 then 'high'
+   when salary between 55000 and 60000 then 'Mid'
+   else 'low'
+   end as salarycategory
+   from employees where departmentid=102;
+
+
