@@ -1,0 +1,70 @@
+
+#original data
+CREATE TABLE OriginalData (
+    TransactionID INT,
+    CustomerName VARCHAR(255),
+    Email VARCHAR(255),
+    TransactionAmount DECIMAL(10, 2),
+    TransactionDate DATE
+);
+
+INSERT INTO OriginalData VALUES (1, 'Alice', 'alice@example.com', 100.0, '2024-01-01');
+INSERT INTO OriginalData VALUES (2, ' Bob ', 'bob@example', NULL, '2024-02-15');
+INSERT INTO OriginalData VALUES (3, 'Charlie', 'charlie@gmail.com', 150.5, NULL);
+INSERT INTO OriginalData VALUES (4, NULL, 'eve@gmail.com', 200.0, '2024-03-10');
+INSERT INTO OriginalData VALUES (5, 'Eve', NULL, 100.0, '2024-03-10');
+
+
+
+
+# cleaned data
+CREATE TABLE cleaneddata (
+    TransactionID INT,
+    CustomerName VARCHAR(255),
+    Email VARCHAR(255),
+    TransactionAmount DECIMAL(10, 2),
+    TransactionDate DATE
+);
+
+INSERT INTO cleaneddata VALUES (1, 'Alice', 'alice@example.com', 100.0, '2024-01-01');
+INSERT INTO cleaneddata VALUES (2, ' Bob ', 'bob@example', 0, '2024-02-15');
+INSERT INTO cleaneddata VALUES (3, 'Charlie', 'charlie@gmail.com', 150, '2024-01-01');
+INSERT INTO cleaneddata VALUES (4, 'Ali', 'eve@gmail.com', 200.0, '2024-03-10');
+INSERT INTO cleaneddata VALUES (5, 'Eve', 'unknown', 100.0, '2024-03-10');
+
+
+# customer_profiles data 
+
+CREATE TABLE customer_profiles (
+    CustomerID INT PRIMARY KEY,
+    CustomerName VARCHAR(255) NOT NULL
+);
+
+
+INSERT INTO customer_profiles (CustomerID, CustomerName)
+VALUES
+    (1, 'John Doe'),
+    (2, 'Jane Smith'),
+    (3, 'Michael Brown'),
+    (4, 'Emily Davis'),
+    (5, 'William Johnson');
+
+
+
+#transactions data
+CREATE TABLE transactions (
+    TransactionID INT PRIMARY KEY,
+    CustomerName VARCHAR(255),
+    TransactionDate DATE,
+    TransactionAmount DECIMAL(10, 2),
+    Email VARCHAR(255)
+);
+
+
+INSERT INTO transactions (TransactionID, CustomerName, TransactionDate, TransactionAmount, Email)
+VALUES
+    (101, 'John Doe', '2023-12-01', 150.00, 'john.doe@example.com'),
+    (102, 'Jane Smith', '2023-12-01', -50.00, 'jane.smith@example.com'), 
+    (103, 'Michael Brown', '2023-12-02', 200.00, 'michael.brown@example'), 
+    (104, 'Emily Davis', '2023-12-02', NULL, 'emily.davis@example.com'), 
+    (105, 'Unknown Customer', '2023-12-03', 120.00, 'unknown@example.com');

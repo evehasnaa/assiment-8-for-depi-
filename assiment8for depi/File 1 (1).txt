@@ -1,0 +1,27 @@
+
+1. Data Profiling:
+   Generate summary statistics for the TransactionAmount column to identify anomalies or outliers in the dataset.
+
+2. Comparison with Original Data:
+   Compare the number of rows in the original dataset with the cleaned dataset. Ensure no rows were lost during the cleaning process.
+
+3. Validation Rules:
+   - Verify that all email addresses in the cleaned dataset contain an "@" symbol and have no invalid entries.
+   - Check that all TransactionAmounts are non-negative and that missing values have been appropriately replaced.
+
+4. Consistency Checks:
+   Validate that transactions occurring on the same TransactionDate do not have duplicate TransactionIDs.
+
+5. Cross-Table Validation (Simulated):
+   Assume you have a secondary dataset called customer_profiles with columns CustomerName and CustomerID. Write SQL queries to:
+   - Identify transactions in the cleaned dataset with CustomerName values that do not exist in customer_profiles.
+   - Join the two tables to verify that each transaction has a valid customer reference.
+
+6. Null Value Check:
+   Write a query to ensure there are no NULL values in any columns of the cleaned dataset.
+
+7. Impact of Cleaning:
+   Generate a report comparing:
+   - The count of missing values in the original and cleaned datasets for each column.
+   - The number of duplicate entries in the original and cleaned datasets.
+
